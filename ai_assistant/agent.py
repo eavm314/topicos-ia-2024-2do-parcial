@@ -6,6 +6,7 @@ from ai_assistant.tools import (
     hotel_tool,
     bus_tool,
     restaurant_tool,
+    get_current_date_tool,
 )
 
 
@@ -18,6 +19,7 @@ class TravelAgent:
                 hotel_tool,
                 bus_tool,
                 restaurant_tool,
+                get_current_date_tool,
             ],
             verbose=True,
         )

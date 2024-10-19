@@ -161,8 +161,17 @@ def reserve_restaurant(
     save_reservation(reservation)
     return reservation
 
+def get_current_date() -> str:
+    """
+    This function returns the current date in ISO format.
+    Returns:
+        - str: The current date in ISO format.
+    """
+    return date.today().isoformat()
+
 
 flight_tool = FunctionTool.from_defaults(fn=reserve_flight, return_direct=False)
 hotel_tool = FunctionTool.from_defaults(fn=reserve_hotel, return_direct=False)
 bus_tool = FunctionTool.from_defaults(fn=reserve_bus, return_direct=False)
 restaurant_tool = FunctionTool.from_defaults(fn=reserve_restaurant, return_direct=False)
+get_current_date_tool = FunctionTool.from_defaults(fn=get_current_date, return_direct=False)
