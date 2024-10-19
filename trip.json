@@ -30,5 +30,13 @@
         "destination": "Dallas",
         "cost": 401,
         "reservation_type": "TripReservation"
+    },
+    {
+        "trip_type": "FLIGHT",
+        "date": "2023-10-04",
+        "departure": "Miami",
+        "destination": "Ecuador",
+        "cost": 585,
+        "reservation_type": "TripReservation"
     }
 ]
