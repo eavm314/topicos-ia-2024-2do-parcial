@@ -8,7 +8,7 @@ def get_agent() -> ReActAgent:
     return TravelAgent().get_agent()
 
 
-app = FastAPI(title="AI Agent")
+app = FastAPI(title="AI Travel Assistant Agent")
 
 
 @app.get("/recommendations/cities")
