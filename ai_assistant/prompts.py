@@ -105,24 +105,18 @@ agent_prompt_tpl = PromptTemplate(agent_prompt_str)
 
 # Promps for api requests
 recommend_cities_prompt = """
-Recommend cities in bolivia based on the travel guide, put special attention to the activities
+Recommend {field} in the city of '{city}' based on the travel guide, put special attention to the activities
 that can be done in the cities and the cultural insights, activities to do, places to visit, 
-hotels and restaurants.
+hotels and restaurants that you know.
 
-Please answer in the following format for each city recommended unless the user asks for different format, remember to use the same language as the user's notes for the field names in [brackets], and remove the brackets:
+If the city is not in Bolivia, you directly ask the user for another city.
+Else, please answer as follows using the same language as the user's notes, use the format provided in the notes if present:
 
-```
-- [City]: city name (Mandatory)
-- [Description]: brief summary of the city (Mandatory)
-- [Activities]: main activities to do and places to visit (Optional)
-- [Culture]: main cultural insights (Optional)
-- [Hotels]: main hotels in the city (Optional)
-- [Restaurants]: main restaurants in the city (Optional)
-```
+City Name
+- Description: brief summary of the city
+- {field}: {description}
 
-Provide information of 3 cities unless the user asks for a different amount.
-Provide all the optional fields unless the user asks for specific information.
-Provide 3 items per optional field, unless the user asks for a different amount.
+Provide 3 items unless the user asks for a different amount.
 
 IMPORTANT:
 The user has provided you some notes in their language, 
