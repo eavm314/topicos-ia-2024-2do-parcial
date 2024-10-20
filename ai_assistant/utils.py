@@ -5,7 +5,6 @@ from ai_assistant.models import (
     RestaurantReservation,
     TripReservation,
     HotelReservation,
-    TripType,
 )
 from ai_assistant.config import get_agent_settings
 
@@ -40,6 +39,7 @@ def save_reservation(
 
     print(f"saved reservation!")
 
+
 def load_reservations() -> list:
     if os.path.exists(SETTINGS.log_file) and os.path.getsize(SETTINGS.log_file) > 0:
         with open(SETTINGS.log_file, "r") as file:
@@ -50,3 +50,9 @@ def load_reservations() -> list:
     else:
         reservations = []
     return reservations
+
+
+def reset_reservations():
+    if os.path.exists(SETTINGS.log_file):
+        with open(SETTINGS.log_file, "w") as file:
+            json.dump([], file)
