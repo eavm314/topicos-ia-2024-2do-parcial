@@ -39,3 +39,14 @@ def save_reservation(
         json.dump(reservations, file, indent=4, default=custom_serializer)
 
     print(f"saved reservation!")
+
+def load_reservations() -> list:
+    if os.path.exists(SETTINGS.log_file) and os.path.getsize(SETTINGS.log_file) > 0:
+        with open(SETTINGS.log_file, "r") as file:
+            try:
+                reservations = json.load(file)
+            except json.JSONDecodeError:
+                reservations = []
+    else:
+        reservations = []
+    return reservations

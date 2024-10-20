@@ -38,5 +38,29 @@
         "destination": "Ecuador",
         "cost": 585,
         "reservation_type": "TripReservation"
+    },
+    {
+        "trip_type": "FLIGHT",
+        "date": "2024-10-21",
+        "departure": "La Paz",
+        "destination": "Santa Cruz",
+        "cost": 400,
+        "reservation_type": "TripReservation"
+    },
+    {
+        "reservation_time": "2025-08-15T19:00:00",
+        "restaurant": "Restaurante mencionado",
+        "city": "Tarija",
+        "dish": "medallones de lomito con salsa de mariscos",
+        "cost": 27,
+        "reservation_type": "RestaurantReservation"
+    },
+    {
+        "reservation_time": "2024-10-21T20:00:00",
+        "restaurant": "Burger King",
+        "city": "La Paz",
+        "dish": "No especificado",
+        "cost": 23,
+        "reservation_type": "RestaurantReservation"
     }
 ]

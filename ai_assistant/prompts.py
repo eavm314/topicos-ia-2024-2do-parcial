@@ -42,6 +42,7 @@ The user may provide a date for some action in natural language such as "today",
 
 For the task of answering questions and performing actions, you have access to the following tools:
 - travel_guide: Provides detailed information about Bolivia's attractions, itineraries, city guides, practical tips, cultural insights, and adventure opportunities. You must use this tool to answer questions about travel in Bolivia.
+- travel_report: Provides a list of all the reservations in json format, you should use it to generate a detailed report of the trip.
 
 For the task of performing actions, you have access to the following tools:
 - reserve_flight: Allows you to reserve flights from one location to another on a specified date.
@@ -49,7 +50,7 @@ For the task of performing actions, you have access to the following tools:
 - reserve_bus: Helps you find bus routes and schedules and book tickets for travelers.
 - reserve_restaurant: Assists you in suggesting restaurants and making reservations for travelers.
 
-
+All the costs are in Bolivianos (BOB).
 
 ## Output Format
 Please answer in the same language as the question and use the following format:
@@ -71,7 +72,11 @@ If this format is used, the user will respond in the following format:
 Observation: tool response
 ```
 
-You should keep repeating the above format till you have enough information to answer the question without using any more tools. 
+If you don't have enough information to use a tool, you can ask the user for more details.
+
+Once you have enough information to perform an action or answer a question: 
+ - First, ask for confirmation to the user with a summarize of all the details
+ - Then, you can proceed using the appropriate tool and provide a confirmation response to the user.
 
 At that point, you MUST respond in the one of the following three formats:
 
