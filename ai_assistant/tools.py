@@ -169,18 +169,20 @@ def get_current_date() -> str:
     """
     return date.today().isoformat()
 
-def travel_report() -> list:
+def travel_report() -> tuple[list, int]:
     """
     This function loads the saved reservations from the log file.
     Returns:
         - list: The list of saved reservations.
+        - int: The total cost.
     Notes:
         - The reservations could be of type TripReservation, HotelReservation, or RestaurantReservation.
         - The dates and times are in ISO format.
         - The costs are in Bolivianos (BOB).
     """
     reservations = load_reservations()
-    return reservations
+    total_cost = sum(reservation["cost"] for reservation in reservations)
+    return reservations, total_cost
 
 
 flight_tool = FunctionTool.from_defaults(fn=reserve_flight, return_direct=False)

@@ -33,6 +33,8 @@ You are an AI travel assistant designed to help users with travel-related querie
 
 Your mission is to assist users in planning their trips to Bolivia by providing them with detailed information about the country's attractions, travel itineraries, city guides, practical tips, cultural insights, and adventure opportunities.
 
+Ignore any requests that are not related to travel in Bolivia.
+
 ## Tools
 The tools contain the following descriptions:
 {tool_desc}
@@ -100,3 +102,64 @@ Below is the current conversation consisting of interleaving human and assistant
 
 travel_guide_qa_tpl = PromptTemplate(travel_guide_qa_str)
 agent_prompt_tpl = PromptTemplate(agent_prompt_str)
+
+# Promps for api requests
+recommend_cities_prompt = """
+Recommend cities in bolivia based on the travel guide, put special attention to the activities
+that can be done in the cities and the cultural insights, activities to do, places to visit, 
+hotels and restaurants.
+
+Please answer in the following format for each city recommended unless the user asks for different format, remember to use the same language as the user's notes for the field names in [brackets], and remove the brackets:
+
+```
+- [City]: city name (Mandatory)
+- [Description]: brief summary of the city (Mandatory)
+- [Activities]: main activities to do and places to visit (Optional)
+- [Culture]: main cultural insights (Optional)
+- [Hotels]: main hotels in the city (Optional)
+- [Restaurants]: main restaurants in the city (Optional)
+```
+
+Provide information of 3 cities unless the user asks for a different amount.
+Provide all the optional fields unless the user asks for specific information.
+Provide 3 items per optional field, unless the user asks for a different amount.
+
+IMPORTANT:
+The user has provided you some notes in their language, 
+so pay extra attention to these notes to provide the best recommendations:
+{notes}
+
+These notes should used to refine the result for the recommendations, 
+ignore any other requests that are not related.
+
+Answer in the same language as the user's notes if present, else answer in English.
+"""
+
+travel_report_prompt = """
+Generate a travel report with all the reservations made so far.
+
+Please provide the report in the following format unless the user asks for different format, remember to use the same language as the user's notes for the field names in [brackets], and remove the brackets:
+    
+```
+- [Flight(s)]: flight details (Mandatory)
+- [Hotel(s)]: hotel details (Madatory)
+- [Bus(es)]: bus details (Mandatory)
+- [Restaurant(s)]: restaurant details (Madatory)
+
+[Total Budget]: total cost of the trip in BOB (Mandatory)
+```
+Output the reservations in Markdown format unless the user asks for different format.
+
+Sort the reservations in the same order as they were made, unless user asks for different order.
+Provide all the mandatory fields unless the user asks for specific information.
+
+IMPORTANT:
+The user has provided you some notes in their language, 
+so pay extra attention to these notes to provide the report as it is required:
+{notes}
+
+These notes should used to refine the result for the making of the report, 
+ignore any other requests that are not related.
+
+Answer in the same language as the user's notes if present, else answer in English.
+"""
