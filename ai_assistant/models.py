@@ -32,7 +32,11 @@ class RestaurantReservation(BaseModel):
     cost: int
 
 
-class AgentAPIResponse(BaseModel):
+class APIResponse(BaseModel):
     status: str
+    message: str
+
+class AgentAPIResponse(APIResponse):
     agent_response: str
     timestamp: datetime = Field(default_factory=datetime.now)
+

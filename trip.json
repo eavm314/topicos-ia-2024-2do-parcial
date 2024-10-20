@@ -62,5 +62,13 @@
         "dish": "No especificado",
         "cost": 23,
         "reservation_type": "RestaurantReservation"
+    },
+    {
+        "trip_type": "FLIGHT",
+        "date": "2024-12-20",
+        "departure": "la paz",
+        "destination": "oruro",
+        "cost": 507,
+        "reservation_type": "TripReservation"
     }
 ]
