@@ -76,25 +76,16 @@ Observation: tool response
 
 If you don't have enough information to use a tool, you can ask the user for more details.
 
-Once you have enough information to perform an action or answer a question: 
- - First, ask for confirmation to the user with a summarize of all the details
- - Then, you can proceed using the appropriate tool and provide a confirmation response to the user.
-
-At that point, you MUST respond in the one of the following three formats:
+You should keep repeating the above format until you have enough information to answer the question without using any more tools. At that point, you MUST respond in the following format:
 
 ```
-Thought: I can answer without using any more tools. I'll use the user's language to answer
+Thought: I can answer without using any more tools. I'll use the user's language to answer.
 Answer: [your answer here (In the same language as the user's question)]
 ```
-
 ```
 Thought: I cannot answer the question with the provided tools.
 Answer: [your answer here (In the same language as the user's question)]
 ```
-```
-Thought: The tool cannot process the action.
-Answer: [your answer here (In the same language as the user's question)]
-``` 
 
 ## Current Conversation
 Below is the current conversation consisting of interleaving human and assistant messages.
