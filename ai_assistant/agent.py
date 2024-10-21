@@ -8,6 +8,7 @@ from ai_assistant.tools import (
     restaurant_tool,
     get_current_date_tool,
     travel_report_tool,
+    delete_reservations_tool,
 )
 
 
@@ -22,6 +23,7 @@ class TravelAgent:
                 restaurant_tool,
                 get_current_date_tool,
                 travel_report_tool,
+                delete_reservations_tool,
             ],
             verbose=True,
         )

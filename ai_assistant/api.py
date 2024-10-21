@@ -3,7 +3,7 @@ from llama_index.core.agent import ReActAgent
 from ai_assistant.agent import TravelAgent
 from ai_assistant.models import AgentAPIResponse, APIResponse
 from ai_assistant.prompts import agent_prompt_tpl, recommend_cities_prompt, travel_report_prompt
-from ai_assistant.tools import reserve_bus, reserve_flight, reserve_hotel, reserve_restaurant
+from ai_assistant.tools import reserve_bus, reserve_flight, reserve_hotel, reserve_restaurant, delete_reservations
 from functools import cache
 
 
@@ -88,7 +88,7 @@ def recommend_activities(
     )
 
 
-@app.get("/report")
+@app.get("/reservations")
 def get_travel_report(
     notes: list[str] = Query([]), agent: ReActAgent = Depends(get_agent)
 ):
@@ -103,7 +103,7 @@ def get_travel_report(
     )
 
 
-@app.post("/reserve/flight")
+@app.post("/reservations/flight")
 def flight_reservation(date: str, departure: str, destination: str):
     try:
         reserve_flight(date, departure, destination)
@@ -115,7 +115,7 @@ def flight_reservation(date: str, departure: str, destination: str):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@app.post("/reserve/bus")
+@app.post("/reservations/bus")
 def bus_reservation(date: str, departure: str, destination: str):
     try:
         reserve_bus(date, departure, destination)
@@ -127,7 +127,7 @@ def bus_reservation(date: str, departure: str, destination: str):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@app.post("/reserve/hotel")
+@app.post("/reservations/hotel")
 def hotel_reservation(chekin_date: str, chekout_date: str, hotel_name: str, city: str):
     try:
         reserve_hotel(chekin_date, chekout_date, hotel_name, city)
@@ -139,7 +139,7 @@ def hotel_reservation(chekin_date: str, chekout_date: str, hotel_name: str, city
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     
-@app.post("/reserve/restaurant")
+@app.post("/reservations/restaurant")
 def restaurant_reservation(reservation_time: str, restaurant: str, city: str, dish: str):
     try:
         reserve_restaurant(reservation_time, restaurant, city, dish)
@@ -150,3 +150,11 @@ def restaurant_reservation(reservation_time: str, restaurant: str, city: str, di
     
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    
+@app.delete("/reservations")
+def delete_all_reservations():
+    delete_reservations()
+    return APIResponse(
+        status="OK", 
+        message="All reservations deleted successfully"
+    )

@@ -10,7 +10,7 @@ from ai_assistant.models import (
     HotelReservation,
     RestaurantReservation,
 )
-from ai_assistant.utils import save_reservation, load_reservations
+from ai_assistant.utils import save_reservation, load_reservations, reset_reservations
 
 SETTINGS = get_agent_settings()
 
@@ -184,6 +184,16 @@ def travel_report() -> tuple[list, int]:
     total_cost = sum(reservation["cost"] for reservation in reservations)
     return reservations, total_cost
 
+def delete_reservations():
+    """
+    This function deletes all saved reservations from the log file.
+    Returns:
+        - list: The list of deleted reservations.
+    """
+    reservations = load_reservations()
+    reset_reservations()
+    return reservations
+
 
 flight_tool = FunctionTool.from_defaults(fn=reserve_flight, return_direct=False)
 hotel_tool = FunctionTool.from_defaults(fn=reserve_hotel, return_direct=False)
@@ -191,3 +201,4 @@ bus_tool = FunctionTool.from_defaults(fn=reserve_bus, return_direct=False)
 restaurant_tool = FunctionTool.from_defaults(fn=reserve_restaurant, return_direct=False)
 get_current_date_tool = FunctionTool.from_defaults(fn=get_current_date, return_direct=False)
 travel_report_tool = FunctionTool.from_defaults(fn=travel_report, return_direct=False)
+delete_reservations_tool = FunctionTool.from_defaults(fn=delete_reservations, return_direct=False)
